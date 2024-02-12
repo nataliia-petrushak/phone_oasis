@@ -23,3 +23,5 @@ starlette==0.35.1
 typing_extensions==4.9.0
 urllib3==2.1.0
 uvicorn==0.26.0
+djangorestframework
+django==4.0
