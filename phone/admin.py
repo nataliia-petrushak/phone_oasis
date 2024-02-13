@@ -1,8 +1,5 @@
 from django.contrib import admin
-from .models import Phone, Image
-
-
-admin.site.register(Image)
+from .models import Phone
 
 
 @admin.register(Phone)

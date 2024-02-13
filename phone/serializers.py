@@ -1,12 +1,6 @@
 from rest_framework import serializers
-from .models import Phone, Image
+from .models import Phone
 from device.serializers import DeviceSerializer, DeviceListSerializer, DeviceDetailSerializer
-
-
-class ImageListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Image
-        fields = ("url",)
 
 
 class PhoneSerializer(DeviceSerializer):
@@ -15,6 +9,7 @@ class PhoneSerializer(DeviceSerializer):
         fields = (
             "id",
             "name",
+            "category",
             "memories",
             "colors",
             "screen",
@@ -28,15 +23,13 @@ class PhoneSerializer(DeviceSerializer):
 
 
 class PhoneListSerializer(DeviceListSerializer):
-    images = ImageListSerializer(many=True, read_only=True)
 
     class Meta:
         model = Phone
-        fields = ("id", "name", "screen", "memories", "images")
+        fields = ("id", "name", "category", "images", "screen", "memories")
 
 
 class PhoneDetailSerializer(DeviceDetailSerializer):
-    images = ImageListSerializer(many=True, read_only=True)
 
     class Meta:
         model = Phone
