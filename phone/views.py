@@ -6,7 +6,7 @@ from .serializers import PhoneSerializer, PhoneListSerializer, PhoneDetailSerial
 
 
 class PhoneViewSet(viewsets.ModelViewSet):
-    queryset = Phone.objects.prefetch_related("colors, memories").select_related("images")
+    queryset = Phone.objects.prefetch_related("colors", "memories")
     serializer_class = PhoneSerializer
 
     def get_serializer_class(self):
