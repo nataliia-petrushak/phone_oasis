@@ -1,20 +1,15 @@
 from rest_framework import serializers
-from .models import Memory, Color, Phone
+from .models import Phone, Image
+from device.serializers import DeviceSerializer, DeviceListSerializer, DeviceDetailSerializer
 
 
-class MemorySerializer(serializers.ModelSerializer):
+class ImageListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Memory
-        fields = ("id", "ram", "built_in", "price")
+        model = Image
+        fields = ("url",)
 
 
-class ColorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Color
-        fields = ("id", "name", "hex_value")
-
-
-class PhoneSerializer(serializers.ModelSerializer):
+class PhoneSerializer(DeviceSerializer):
     class Meta:
         model = Phone
         fields = (
@@ -32,34 +27,18 @@ class PhoneSerializer(serializers.ModelSerializer):
         )
 
 
-class PhoneListSerializer(PhoneSerializer):
-    memories = MemorySerializer(many=True, read_only=True)
+class PhoneListSerializer(DeviceListSerializer):
+    images = ImageListSerializer(many=True, read_only=True)
 
     class Meta:
         model = Phone
-        fields = ("id", "name", "screen", "memories", "in_cart", "is_favourite")
+        fields = ("id", "name", "screen", "memories", "images")
 
 
-class PhoneDetailSerializer(PhoneListSerializer):
-    memories = MemorySerializer(many=True, read_only=True)
-    colors = ColorSerializer(many=True, read_only=True)
-    images = serializers.SlugRelatedField(slug_field="url", many=True, read_only=True)
+class PhoneDetailSerializer(DeviceDetailSerializer):
+    images = ImageListSerializer(many=True, read_only=True)
 
     class Meta:
         model = Phone
-        fields = (
-            "id",
-            "name",
-            "memories",
-            "colors",
-            "screen",
-            "resolution",
-            "processor",
-            "camera",
-            "zoom",
-            "cell",
-            "about",
-            "is_favourite",
-            "in_cart"
-        )
+        fields = "__all__"
 
