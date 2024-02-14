@@ -1,3 +1,6 @@
-from django.db import models
+from device.models import Device
 
-# Create your models here.
+
+class Tablet(Device):
+    def __str__(self) -> str:
+        return self.name

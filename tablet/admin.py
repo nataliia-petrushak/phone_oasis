@@ -1,3 +1,15 @@
 from django.contrib import admin
+from .models import Tablet
 
-# Register your models here.
+
+@admin.register(Tablet)
+class TabletAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "name",
+        "screen",
+        "resolution",
+        "processor",
+        "camera",
+        "about",
+    )
