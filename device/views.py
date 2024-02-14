@@ -10,6 +10,8 @@ class DeviceViewSet(viewsets.ModelViewSet, ABC):
     serializer_class = DeviceSerializer
 
     def get_queryset(self):
+        self.queryset = self.queryset.order_by("-year_of_creation")
+
         device_name = self.request.query_params.get("name")
 
         if device_name:

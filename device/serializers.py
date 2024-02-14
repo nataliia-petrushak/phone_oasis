@@ -3,15 +3,17 @@ from .models import Memory, Color, Device, Image
 
 
 class ImageListSerializer(serializers.ModelSerializer):
+    color = serializers.SlugRelatedField(slug_field="name", read_only=True)
+
     class Meta:
         model = Image
-        fields = ("url",)
+        fields = ("url", "color")
 
 
 class MemorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Memory
-        fields = ("id", "ram", "capacity", "price")
+        fields = ("id", "ram", "capacity", "old_price", "new_price")
 
 
 class ColorSerializer(serializers.ModelSerializer):
@@ -34,7 +36,6 @@ class DeviceSerializer(serializers.ModelSerializer):
             "resolution",
             "processor",
             "camera",
-            "zoom",
             "about"
         )
 
@@ -65,6 +66,5 @@ class DeviceDetailSerializer(DeviceListSerializer):
             "resolution",
             "processor",
             "camera",
-            "zoom",
             "about",
         )

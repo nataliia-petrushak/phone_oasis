@@ -9,7 +9,7 @@ class ColorAdmin(admin.ModelAdmin):
 
 @admin.register(Memory)
 class MemoryAdmin(admin.ModelAdmin):
-    list_display = ("id", "ram", "capacity", "price")
+    list_display = ("id", "ram", "capacity", "old_price", "new_price")
 
 
 @admin.register(Image)
