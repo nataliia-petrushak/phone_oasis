@@ -1,10 +1,10 @@
-from rest_framework import viewsets
+from device.views import DeviceViewSet
 
 from .models import Phone
 from .serializers import PhoneSerializer, PhoneListSerializer, PhoneDetailSerializer
 
 
-class PhoneViewSet(viewsets.ModelViewSet):
+class PhoneViewSet(DeviceViewSet):
     queryset = Phone.objects.prefetch_related("colors", "memories", "images").select_related("category")
     serializer_class = PhoneSerializer
 
