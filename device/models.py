@@ -43,7 +43,8 @@ class Image(models.Model):
 class Memory(models.Model):
     ram = models.CharField(max_length=255)
     capacity = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits=7, decimal_places=2)
+    new_price = models.DecimalField(max_digits=7, decimal_places=2, null=True)
+    old_price = models.DecimalField(max_digits=7, decimal_places=2, null=True)
 
     class Meta:
         verbose_name_plural = "memories"
@@ -62,7 +63,7 @@ class Device(models.Model):
     resolution = models.CharField(max_length=255)
     processor = models.CharField(max_length=255)
     camera = models.CharField(max_length=255)
-    zoom = models.CharField(max_length=255)
+    year_of_creation = models.IntegerField(null=True)
     about = models.TextField()
 
     def __str__(self) -> str:
