@@ -51,7 +51,7 @@ class Memory(models.Model):
         verbose_name_plural = "memories"
 
     def __str__(self) -> str:
-        return f"{self.ram}, {self.capacity} -> {self.price}"
+        return f"{self.ram}, {self.capacity} -> {self.new_price}"
 
 
 class Device(models.Model):
