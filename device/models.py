@@ -3,6 +3,7 @@ import uuid
 
 from django.db import models
 from django.utils.text import slugify
+from .google_image_field import GoogleImageField
 
 
 class Category(models.Model):
@@ -27,14 +28,14 @@ def devices_image_file_path(instance, filename: str):
     _, extension = os.path.splitext(filename)
     filename = f"{slugify(instance.device_name)}-{uuid.uuid4()}{extension}"
 
-    return os.path.join("uploads", instance.color.name, instance.product_category.name, filename)
+    return os.path.join("uploads", instance.product_category.name, instance.color.name, filename)
 
 
 class Image(models.Model):
     device_name = models.CharField(max_length=255)
     color = models.ForeignKey(Color, on_delete=models.CASCADE)
     product_category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    url = models.ImageField(upload_to=devices_image_file_path, null=True)
+    url = GoogleImageField(upload_to=devices_image_file_path, null=True)
 
     def __str__(self) -> str:
         return f"{self.device_name} - {self.color.name}"
